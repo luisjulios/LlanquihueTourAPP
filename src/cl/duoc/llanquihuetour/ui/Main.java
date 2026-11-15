@@ -12,14 +12,17 @@ public class Main {
         Consola.encabezado("LLANQUIHUE TOUR");
         Consola.info("Iniciando aplicación Llanquihue Tour...");
 
+        // Resuelve la ubicación de tours.txt respecto del directorio de ejecución.
         Path archivo = Path.of("resources/tours.txt");
         GestorDatos gestor = new GestorDatos();
 
         try {
+            // Carga la colección una sola vez para reutilizarla en el listado y en el filtro.
             Consola.info("Cargando tours desde " + archivo + "...");
             ArrayList<Tour> tours = gestor.cargarDatos(archivo);
             Consola.exito("Lectura completada. Tours cargados: " + tours.size() + ".");
 
+            // Presenta la colección en su orden original, con numeración para facilitar la consulta.
             Consola.encabezado("LISTADO DE TOURS");
             int numeroTour = 0;
             for (Tour tour : tours) {
@@ -29,6 +32,7 @@ public class Main {
                 Consola.advertencia("No hay tours disponibles.");
             }
 
+            // Selecciona los tours de Aventura sin distinguir mayúsculas ni modificar la colección.
             String categoriaAFiltrar = "Aventura";
             Consola.encabezado("FILTRO POR CATEGORÍA");
             Consola.info("Filtrando tours por categoría: " + categoriaAFiltrar);
@@ -39,12 +43,14 @@ public class Main {
                     Consola.mostrarTour(++coincidencias, tour);
                 }
             }
+            // Distingue la ausencia de resultados de un filtro con coincidencias.
             if (coincidencias == 0) {
                 Consola.advertencia("No se encontraron tours para la categoría indicada.");
             } else {
                 Consola.exito("Tours encontrados: " + coincidencias + ".");
             }
         } catch (IOException e) {
+            // Si falla el acceso al archivo, orienta al usuario sin intentar presentar datos incompletos.
             Consola.error("No fue posible completar la lectura de " + archivo.toAbsolutePath()
                     + ". Compruebe que el archivo exista y tenga permisos de lectura.");
         }

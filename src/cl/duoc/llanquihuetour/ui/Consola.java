@@ -2,7 +2,7 @@ package cl.duoc.llanquihuetour.ui;
 
 import cl.duoc.llanquihuetour.model.Tour;
 
-/** Presentación de datos y mensajes operativos de la aplicación. */
+// Centraliza el formato de salida para mantener una presentación uniforme.
 public final class Consola {
     private static final String SEPARADOR = "----------------------------------------";
     private static final String FORMATO_MENSAJE = "%-7s%s%n";
@@ -30,11 +30,8 @@ public final class Consola {
         System.out.printf("%n%s%n %s%n%s%n%n", SEPARADOR, titulo, SEPARADOR);
     }
 
-    /**
-     * @param numero posición del tour en el listado mostrado, empezando en uno
-     * @param tour tour que se presenta
-     */
     public static void mostrarTour(int numero, Tour tour) {
+        // Usa la numeración del listado o del filtro y expresa el precio en pesos chilenos.
         System.out.printf("%02d. %s%n    Ubicación : %s%n    Valor     : $%d CLP%n"
                         + "    Categoría : %s%n%n",
                 numero, tour.getNombre(), tour.getUbicacion(), tour.getValor(), tour.getCategoria());

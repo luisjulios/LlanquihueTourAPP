@@ -26,14 +26,17 @@ public class GestorDatos {
         int registrosConCamposInvalidos = 0;
         int registrosConValorInvalido = 0;
 
+        // Lee el archivo línea por línea y garantiza su cierre incluso si ocurre una excepción.
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo.toFile()))) {
             String linea;
 
             while ((linea = br.readLine()) != null) {
+                // Las líneas en blanco no representan registros y no se cuentan como errores.
                 if (linea.isBlank()) {
                     continue;
                 }
 
+                // Separa los campos por punto y coma y comprueba la estructura antes de acceder a ellos.
                 String[] campos = linea.split(";");
                 if (campos.length != 4) {
                     registrosConCamposInvalidos++;
@@ -41,18 +44,22 @@ public class GestorDatos {
                 }
 
                 try {
+                    // Interpreta los campos en el orden del archivo; el precio debe ser un entero.
                     String nombre = campos[0];
                     String ubicacion = campos[1];
                     int valor = Integer.parseInt(campos[2]);
                     String categoria = campos[3];
 
+                    // Incorpora cada registro aceptado como objeto Tour al ArrayList, en orden de lectura.
                     Tour tour = new Tour(nombre, ubicacion, valor, categoria);
                     tours.add(tour);
                 } catch (NumberFormatException e) {
+                    // Omite el registro con precio no convertible y permite continuar con los siguientes.
                     registrosConValorInvalido++;
                 }
             }
         }
+        // Agrupa los problemas de formato en un único aviso al terminar la lectura.
         if (registrosConCamposInvalidos > 0 || registrosConValorInvalido > 0) {
             System.out.printf("[WARN] En %s se omitieron %d registros: "
                             + "%d con cantidad de campos distinta de cuatro y %d con valor no entero.%n",
