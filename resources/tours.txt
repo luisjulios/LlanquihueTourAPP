@@ -1,0 +1,10 @@
+Isla Huar;Calbuco;1200;Cultural
+Saltos del Petrohue;Puerto Varas;1800;Naturaleza
+Volcan Osorno;Puerto Varas;2500;Aventura
+Lago Todos los Santos;Petrohue;2200;Lacustre
+Frutillar Bajo;Frutillar;950;Cultural
+Isla Tenglo;Puerto Montt;1100;Gastronomico
+Parque Alerce Andino;Puerto Montt;1600;Naturaleza
+Termas de Ralun;Puerto Varas;2800;Bienestar
+Costanera de Llanquihue;Llanquihue;800;Recreativo
+Cascadas del Rio Pescado;Puerto Varas;1400;Aventura
